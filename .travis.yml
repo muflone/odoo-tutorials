@@ -1,0 +1,11 @@
+language: python
+dist: bionic
+python:
+  - "3.9"
+install:
+  - pip install -r requirements_ci.txt
+script:
+  - python -m compileall library_app
+  - python -m pycodestyle library_app
+  - python -m flake8 library_app
+  - ls -laR .
