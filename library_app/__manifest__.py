@@ -20,5 +20,6 @@
 
     # dependant files
     'data': [
+        'views/library_menu.xml',
     ],
 }
