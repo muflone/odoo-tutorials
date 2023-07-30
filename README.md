@@ -13,7 +13,7 @@
 
 # Description
 
-Basic tutorials for Odoo 12.
+Basic tutorials for Odoo.
 
 # System Requirements
 
