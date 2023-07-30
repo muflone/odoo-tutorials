@@ -35,6 +35,7 @@
 
     # dependant files
     'data': [
+        'security/library_security.xml',
         'views/books_view.xml',
     ],
 }
