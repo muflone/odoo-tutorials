@@ -31,7 +31,7 @@
     'category': 'Uncategorized',
 
     # any module necessary for this one to work correctly
-    'depends': ['library_app'],
+    'depends': ['library_app', 'mail'],
 
     # dependant files
     'data': [

@@ -24,6 +24,7 @@ import odoo
 class Member(odoo.models.Model):
     _name = 'library.member'
     _description = 'Library member'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     card_number = odoo.fields.Char()
     partner_id = odoo.fields.Many2one(comodel_name='res.partner',
                                       delegate=True,
