@@ -18,4 +18,10 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from . import models                                               # noqa: F401
+import odoo
+
+
+class Book(odoo.models.Model):
+    _inherit = 'library.book'
+    # Add new fields
+    is_available = odoo.fields.Boolean(string='Is Available?')
