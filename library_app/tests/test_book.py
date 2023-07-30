@@ -24,6 +24,8 @@ from odoo.tests.common import TransactionCase
 class TestBook(TransactionCase):
     def setUp(self, *args, **kwargs):
         result = super().setUp(*args, **kwargs)
+        user_admin = self.env.ref(xml_id='base.user_admin')
+        self.env = self.env(user=user_admin)
         self.Book = self.env['library.book']
         self.book = self.Book.create({
             'name': 'Odoo tutorial',
