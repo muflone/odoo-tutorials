@@ -39,5 +39,6 @@
         'security/ir.model.access.csv',
         'views/library_menu.xml',
         'views/books_view.xml',
+        'views/member_view.xml',
     ],
 }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_form_member" model="ir.ui.view">
+        <field name="name">Library Member Form</field>
+        <field name="model">library.member</field>
+        <field name="arch" type="xml">
+            <form string="Member">
+                <header>
+                    <!-- Buttons will go here -->
+                </header>
+                <sheet>
+                    <!-- Content goes here -->
+                    <group name="group_top">
+                        <group name="group_left">
+                            <field name="name" />
+                            <field name="email" />
+                            <field name="card_number" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_tree_member" model="ir.ui.view">
+        <field name="name">Members List</field>
+        <field name="model">library.member</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="card_number" />
+            </tree>
+        </field>
+    </record>
+</odoo>
