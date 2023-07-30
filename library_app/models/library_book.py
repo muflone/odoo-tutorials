@@ -19,11 +19,29 @@
 ##
 
 import odoo
+import odoo.exceptions
 
 
 class Book(odoo.models.Model):
     _name = 'library.book'
     _description = 'Book'
+
+    @odoo.api.multi
+    def _check_isbn(self):
+        """
+        Check the Book ISBN
+
+        :return:
+        """
+        self.ensure_one()
+        digits = [int(x) for x in self.isbn if x.isdigit()]
+        if len(digits) == 13:
+            ponderations = [1, 3] * 6
+            terms = [a * b for a, b in zip(digits[:12], ponderations)]
+            remain = sum(terms) % 20
+            check = 10 - remain if remain != 0 else 0
+            return digits[-1] == check
+
     name = odoo.fields.Char(string='Title',
                             required=True)
     isbn = odoo.fields.Char(string='ISBN')
@@ -35,3 +53,15 @@ class Book(odoo.models.Model):
                                         string='Publisher')
     author_ids = odoo.fields.Many2many(comodel_name='res.partner',
                                        string='Authors')
+
+    @odoo.api.multi
+    def button_check_isbn(self):
+        for book in self:
+            if not book.isbn:
+                raise odoo.exceptions.Warning('Missing ISBN for {BOOK}'.format(
+                    BOOK=book.name))
+            elif not book._check_isbn():
+                raise odoo.exceptions.Warning(
+                    'Invalid ISBN {ISBN} for {BOOK}'.format(ISBN=book.isbn,
+                                                            BOOK=book.name))
+        return True
