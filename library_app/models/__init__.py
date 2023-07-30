@@ -18,4 +18,4 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from . import models                                               # noqa: F401
+from . import library_book                                         # noqa: F401

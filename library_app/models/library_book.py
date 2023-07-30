@@ -18,4 +18,20 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from . import models                                               # noqa: F401
+import odoo
+
+
+class Book(odoo.models.Model):
+    _name = 'library.book'
+    _description = 'Book'
+    name = odoo.fields.Char(string='Title',
+                            required=True)
+    isbn = odoo.fields.Char(string='ISBN')
+    active = odoo.fields.Boolean(string='Active?',
+                                 default=True)
+    date_published = odoo.fields.Date()
+    image = odoo.fields.Binary(string='Cover')
+    publisher_id = odoo.fields.Many2one(comodel_name='res.partner',
+                                        string='Publisher')
+    author_ids = odoo.fields.Many2many(comodel_name='res.partner',
+                                       string='Authors')
