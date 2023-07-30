@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Action to open the Members list -->
+    <act_window id="action_library_member"
+                name="Library Members"
+                res_model="library.member"
+                view_mode="tree,form" />
+    <!-- Menu item to open the Members list -->
+    <menuitem id="menu_library_members"
+              name="Members"
+              parent="library_app.menu_library"
+              action="action_library_member" />
+</odoo>

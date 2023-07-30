@@ -18,5 +18,14 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from . import library_book                                         # noqa: F401
-from . import library_member                                       # noqa: F401
+import odoo
+
+
+class Member(odoo.models.Model):
+    _name = 'library.member'
+    _description = 'Library member'
+    card_number = odoo.fields.Char()
+    partner_id = odoo.fields.Many2one(comodel_name='res.partner',
+                                      delegate=True,
+                                      ondelete='cascade',
+                                      required=True)
