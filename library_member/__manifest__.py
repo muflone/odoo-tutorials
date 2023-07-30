@@ -35,5 +35,6 @@
 
     # dependant files
     'data': [
+        'views/books_view.xml',
     ],
 }
