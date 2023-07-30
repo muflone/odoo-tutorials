@@ -7,6 +7,9 @@
             <form string="Book">
                 <header>
                     <!-- Buttons will go here -->
+                    <button name="button_check_isbn"
+                            type="object"
+                            string="Check ISBN" />
                 </header>
                 <sheet>
                     <!-- Content goes here -->
