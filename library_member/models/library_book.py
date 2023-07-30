@@ -25,3 +25,6 @@ class Book(odoo.models.Model):
     _inherit = 'library.book'
     # Add new fields
     is_available = odoo.fields.Boolean(string='Is Available?')
+    # Change existing fields
+    isbn = odoo.fields.Char(help='Use a valid ISBN-13 or ISBN-10')
+    publisher_id = odoo.fields.Many2one(index=True)
