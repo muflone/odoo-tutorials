@@ -4,4 +4,7 @@
     <record id="library_app.library_group_user" model="res.groups">
         <field name="name">Librarian</field>
     </record>
+    <record id="library_app.library_group_manager" model="res.groups">
+        <field name="name">Library Manager</field>
+    </record>
 </odoo>
