@@ -18,5 +18,4 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from . import controllers                                          # noqa: F401
-from . import models                                               # noqa: F401
+from . import main                                                 # noqa: F401

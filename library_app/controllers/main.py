@@ -18,5 +18,15 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from . import controllers                                          # noqa: F401
-from . import models                                               # noqa: F401
+import odoo
+
+
+class Books(odoo.http.Controller):
+    @odoo.http.route(route='/library/books',
+                     auth='user')
+    def list(self, **kwargs):
+        Book = odoo.http.request.env['library.book']
+        books = Book.search([])
+        return odoo.http.request.render(
+            'library_app.book_list_template',
+            {'books': books})
