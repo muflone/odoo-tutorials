@@ -18,26 +18,4 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-import odoo
-
-
-class Book(odoo.models.Model):
-    _inherit = 'library.book'
-    # Add new fields
-    is_available = odoo.fields.Boolean(string='Is Available?')
-    # Change existing fields
-    isbn = odoo.fields.Char(help='Use a valid ISBN-13 or ISBN-10')
-    publisher_id = odoo.fields.Many2one(index=True)
-
-    @odoo.api.multi
-    def _check_isbn(self):
-        self.ensure_one()
-        digits = [int(x) for x in self.isbn if x.isdigit()]
-        if len(digits) == 10:
-            # Add check for 10 digits ISBN
-            ponderators = range(1, 10)
-            total = sum(a * b for a, b in zip(digits[:9], ponderators))
-            check = total % 11
-            return digits[-1] == check
-        else:
-            return super()._check_isbn()
+from . import test_book                                            # noqa: F401

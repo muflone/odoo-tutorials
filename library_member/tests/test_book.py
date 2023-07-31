@@ -18,26 +18,20 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-import odoo
+from odoo.tests.common import TransactionCase
 
 
-class Book(odoo.models.Model):
-    _inherit = 'library.book'
-    # Add new fields
-    is_available = odoo.fields.Boolean(string='Is Available?')
-    # Change existing fields
-    isbn = odoo.fields.Char(help='Use a valid ISBN-13 or ISBN-10')
-    publisher_id = odoo.fields.Many2one(index=True)
+class TestBook(TransactionCase):
+    def setUp(self, *args, **kwargs):
+        result = super().setUp(*args, **kwargs)
+        user_admin = self.env.ref(xml_id='base.user_admin')
+        self.env = self.env(user=user_admin)
+        self.Book = self.env['library.book']
+        self.book = self.Book.create({
+            'name': 'Odoo tutorial 2',
+            'isbn': '0-571-05686-5'})
+        return result
 
-    @odoo.api.multi
-    def _check_isbn(self):
-        self.ensure_one()
-        digits = [int(x) for x in self.isbn if x.isdigit()]
-        if len(digits) == 10:
-            # Add check for 10 digits ISBN
-            ponderators = range(1, 10)
-            total = sum(a * b for a, b in zip(digits[:9], ponderators))
-            check = total % 11
-            return digits[-1] == check
-        else:
-            return super()._check_isbn()
+    def test_check_isbn_10(self):
+        """Check valid ISBN"""
+        self.assertTrue(self.book._check_isbn())
