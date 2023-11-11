@@ -18,5 +18,15 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from . import controllers                                          # noqa: F401
-from . import models                                               # noqa: F401
+import odoo
+from odoo.addons.library_app.controllers.main import Books
+
+class BooksExtended(Books):
+    @odoo.http.route()
+    def list(self, **kwargs):
+        response = super().list(**kwargs)
+        if kwargs.get('available') == '1':
+            Book = odoo.http.request.env['library.book']
+            books = Book.search([('is_available', '=', True)])
+            response.qcontext['books'] = books
+        return response
