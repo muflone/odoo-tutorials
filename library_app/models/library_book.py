@@ -25,6 +25,7 @@ import odoo.exceptions
 class Book(odoo.models.Model):
     _name = 'library.book'
     _description = 'Book'
+    _order = 'date_published desc, name asc'
 
     @odoo.api.multi
     def _check_isbn(self):
