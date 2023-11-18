@@ -6,6 +6,7 @@
             <t t-foreach="books" t-as="book">
                 <div class="row">
                     <span t-field="book.name" />,
+                    <span t-field="book.book_type" />,
                     <span t-field="book.date_published" />,
                     <span t-field="book.publisher_id" />
                 </div>

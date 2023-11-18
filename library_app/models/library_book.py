@@ -46,9 +46,16 @@ class Book(odoo.models.Model):
         else:
             return False
 
+    # String fields
     name = odoo.fields.Char(string='Title',
                             required=True)
     isbn = odoo.fields.Char(string='ISBN')
+    book_type = odoo.fields.Selection(selection=[('paper', 'Paperback'),
+                                                 ('hard', 'Hardcover'),
+                                                 ('electronic', 'Electronic'),
+                                                 ('other', 'Other')],
+                                      string='Type')
+    # Other fields
     active = odoo.fields.Boolean(string='Active?',
                                  default=True)
     date_published = odoo.fields.Date()
