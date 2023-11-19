@@ -26,6 +26,20 @@
                             <field name="active" />
                             <field name="image" widget="image" />
                         </group>
+                        <group name="group_three">
+                            <field name="notes" />
+                            <field name="descr" />
+                        </group>
+                        <group name="group_four">
+                            <field name="copies" />
+                            <field name="avg_rating" />
+                            <field name="price" />
+                            <field name="currency_id" />
+                        </group>
+                        <group name="group_five">
+                            <field name="date_published" />
+                            <field name="last_borrow_date" />
+                        </group>
                     </group>
                 </sheet>
             </form>

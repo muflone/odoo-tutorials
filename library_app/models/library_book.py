@@ -49,17 +49,32 @@ class Book(odoo.models.Model):
     # String fields
     name = odoo.fields.Char(string='Title',
                             required=True)
-    isbn = odoo.fields.Char(string='ISBN')
+    isbn = odoo.fields.Char(string='ISBN',
+                            size=13)
     book_type = odoo.fields.Selection(selection=[('paper', 'Paperback'),
                                                  ('hard', 'Hardcover'),
                                                  ('electronic', 'Electronic'),
                                                  ('other', 'Other')],
                                       string='Type')
+    notes = odoo.fields.Text(string='Internal notes')
+    descr = odoo.fields.Html(string='Description')
+    # Numeric fields
+    copies = odoo.fields.Integer(default=1)
+    avg_rating = odoo.fields.Float(string='Average rating',
+                                   digits=(3, 2))
+    price = odoo.fields.Monetary(string='Price',
+                                 currency_field='currency_id')
+    currency_id = odoo.fields.Many2many(comodel_name='res.currency')
+    # Date and time fields
+    date_published = odoo.fields.Date()
+    last_borrow_date = odoo.fields.Datetime(
+        string='Last Borrowed on',
+        default=lambda self: odoo.fields.Datetime.now())
     # Other fields
     active = odoo.fields.Boolean(string='Active?',
                                  default=True)
-    date_published = odoo.fields.Date()
     image = odoo.fields.Binary(string='Cover')
+    # Relational fields
     publisher_id = odoo.fields.Many2one(comodel_name='res.partner',
                                         string='Publisher')
     author_ids = odoo.fields.Many2many(comodel_name='res.partner',
