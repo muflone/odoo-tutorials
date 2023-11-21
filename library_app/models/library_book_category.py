@@ -41,3 +41,8 @@ class BookCategory(odoo.models.Model):
     child_ids = odoo.fields.One2many(comodel_name='library.book.category',
                                      inverse_name='parent_id',
                                      string='Subcategories')
+    # Reference fields
+    highlighted_id = odoo.fields.Reference(
+        selection=[('library.book', 'Book'),
+                   ('res.partner', 'Author')],
+        string='Category Highlight')
