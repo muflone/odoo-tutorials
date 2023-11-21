@@ -21,6 +21,7 @@
 import odoo
 from odoo.addons.library_app.controllers.main import Books
 
+
 class BooksExtended(Books):
     @odoo.http.route()
     def list(self, **kwargs):
