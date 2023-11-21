@@ -18,5 +18,11 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from . import library_book                                         # noqa: F401
-from . import res_partner                                          # noqa: F401
+import odoo
+
+
+class Partner(odoo.models.Model):
+    _inherit = 'res.partner'
+    published_book_ids = odoo.fields.One2many(comodel_name='library.book',
+                                              inverse_name='publisher_id',
+                                              string='Published books')
