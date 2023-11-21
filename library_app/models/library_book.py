@@ -79,6 +79,8 @@ class Book(odoo.models.Model):
                                         string='Publisher')
     author_ids = odoo.fields.Many2many(comodel_name='res.partner',
                                        string='Authors')
+    category_id = odoo.fields.Many2one(comodel_name='library.book.category',
+                                       string='Category')
 
     @odoo.api.multi
     def button_check_isbn(self):

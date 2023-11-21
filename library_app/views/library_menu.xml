@@ -13,4 +13,18 @@
               name="Books"
               parent="menu_library"
               action="action_library_book" />
+    <!-- Menu item for Book Configuration -->
+    <menuitem id="menu_library_configuration"
+              name="Configuration"
+              parent="menu_library" />
+    <!-- Action to open the Book Category list -->
+    <act_window id="action_library_book_category"
+                name="Library Books Category"
+                res_model="library.book.category"
+                view_mode="tree,form" />
+    <!-- Menu item to open the Book Category list -->
+    <menuitem id="menu_library_book_category"
+              name="Categories"
+              parent="menu_library_configuration"
+              action="action_library_book_category" />
 </odoo>
