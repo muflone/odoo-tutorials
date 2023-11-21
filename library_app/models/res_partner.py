@@ -26,4 +26,5 @@ class Partner(odoo.models.Model):
     published_book_ids = odoo.fields.One2many(comodel_name='library.book',
                                               inverse_name='publisher_id',
                                               string='Published books')
-    book_ids = odoo.fields.Many2many(comodel_name='library.book',)
+    book_ids = odoo.fields.Many2many(comodel_name='library.book',
+                                     string='Books published')
