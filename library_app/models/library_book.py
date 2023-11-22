@@ -83,6 +83,11 @@ class Book(odoo.models.Model):
         compute='_compute_publisher_country',
         inverse='_inverse_publisher_country',
         search='_search_publisher_country')
+    publisher_country_related = odoo.fields.Many2one(
+        comodel_name='res.country',
+        string='Publisher Country (related)',
+        related='publisher_id.country_id',
+        readonly=False)
     author_ids = odoo.fields.Many2many(comodel_name='res.partner',
                                        string='Authors')
     category_id = odoo.fields.Many2one(comodel_name='library.book.category',
