@@ -124,3 +124,10 @@ class Book(odoo.models.Model):
 
     def _search_publisher_country(self, operator, value):
         return [('publisher_id.country_id', operator, value)]
+
+    @odoo.api.constrains('isbn')
+    def _constrain_isbn_valid(self):
+        for book in self:
+            if book.isbn and not book._check_isbn():
+                raise odoo.exceptions.ValidationError(
+                    '{ISBN} is an invalid ISBN'.format(ISBN=book.isbn))
