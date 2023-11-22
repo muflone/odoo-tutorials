@@ -77,6 +77,10 @@ class Book(odoo.models.Model):
     # Relational fields
     publisher_id = odoo.fields.Many2one(comodel_name='res.partner',
                                         string='Publisher')
+    publisher_country_id = odoo.fields.Many2one(
+        comodel_name='res.country',
+        string='Publisher Country',
+        compute='_compute_publisher_country')
     author_ids = odoo.fields.Many2many(comodel_name='res.partner',
                                        string='Authors')
     category_id = odoo.fields.Many2one(comodel_name='library.book.category',
@@ -93,3 +97,8 @@ class Book(odoo.models.Model):
                     'Invalid ISBN {ISBN} for {BOOK}'.format(ISBN=book.isbn,
                                                             BOOK=book.name))
         return True
+
+    @odoo.api.depends('publisher_id.country_id')
+    def _compute_publisher_country(self):
+        for book in self:
+            book.publisher_country_id = book.publisher_id.country_id
