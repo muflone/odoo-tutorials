@@ -22,6 +22,17 @@ import odoo
 
 
 class Checkout(odoo.models.Model):
+    @odoo.api.model
+    def _default_stage(self):
+        Stage = self.env['library.checkout.stage']
+        return Stage.search(args=[],
+                            limit=1)
+
+    @odoo.api.model
+    def _group_expand_stage_id(self, stages, domain, order):
+        return stages.search(args=[],
+                             order=order)
+
     _name = 'library.checkout'
     _description = 'Checkout request'
     member_id = odoo.fields.Many2one(comodel_name='library.member',
@@ -33,3 +44,7 @@ class Checkout(odoo.models.Model):
     line_ids = odoo.fields.One2many(comodel_name='library.checkout.line',
                                     inverse_name='checkout_id',
                                     string='Borrowed Books')
+    stage_id = odoo.fields.Many2one(comodel_name='library.checkout.stage',
+                                    default=_default_stage,
+                                    group_expand='_group_expand_stage_id')
+    state = odoo.fields.Selection(related='stage_id.state')

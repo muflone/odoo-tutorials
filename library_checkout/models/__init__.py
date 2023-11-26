@@ -20,3 +20,4 @@
 
 from . import library_checkout                                     # noqa: F401
 from . import library_checkout_line                                # noqa: F401
+from . import library_checkout_stage                               # noqa: F401

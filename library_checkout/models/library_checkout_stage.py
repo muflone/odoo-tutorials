@@ -18,27 +18,21 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-{
-    'name': "Library Book Borrowing",
-    'description': """Members can borrow books from the library.""",
-    'author': "Muflone",
-    'application': False,
-    'installable': True,
+import odoo
 
-    'version': '0.1',
-    'license': 'GPL-3',
-    'website': 'https://github.com/muflone/odoo-tutorials',
-    'category': 'Uncategorized',
 
-    # any module necessary for this one to work correctly
-    'depends': ['library_member'],
+class CheckoutStage(odoo.models.Model):
+    _name = 'library.checkout.stage'
+    _description = 'Checkout Stage'
+    _order = 'sequence, name'
 
-    # dependant files
-    'data': [
-        'security/ir.model.access.csv',
-        'views/library_menu.xml',
-        'views/checkout_view.xml',
-        'views/checkout_stage_view.xml',
-        'data/library_checkout_stage.xml',
-    ],
-}
+    name = odoo.fields.Char(string='Stage name')
+    sequence = odoo.fields.Integer(default=10,
+                                   string='Stage ordering')
+    fold = odoo.fields.Boolean()
+    active = odoo.fields.Boolean(default=True)
+    state = odoo.fields.Selection(selection=[('new', 'New'),
+                                             ('open', 'Borrowed'),
+                                             ('done', 'Returned'),
+                                             ('cancel', 'Cancelled')],
+                                  default='new')

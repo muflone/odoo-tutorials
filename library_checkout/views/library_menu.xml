@@ -10,4 +10,14 @@
               name="Checkout"
               parent="library_app.menu_library"
               action="action_library_checkout" />
+    <!-- Action to open the Book Checkout Stages -->
+    <act_window id="action_library_checkout_stage"
+                name="Checkout Stages"
+                res_model="library.checkout.stage"
+                view_mode="tree,form" />
+    <!-- Menu item to open the Book Checkout Stages -->
+    <menuitem id="menu_library_checkout_stage"
+              name="Checkout Stages"
+              parent="library_app.menu_library_configuration"
+              action="action_library_checkout_stage" />
 </odoo>
