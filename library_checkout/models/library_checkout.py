@@ -33,6 +33,18 @@ class Checkout(odoo.models.Model):
         return stages.search(args=[],
                              order=order)
 
+    @odoo.api.onchange('member_id')
+    def _onchange_member_id(self):
+        today = odoo.fields.Date.today()
+        if self.request_date != today:
+            self.request_date = today
+            return {
+                'warning': {
+                    'title': 'Changed Request Date',
+                    'message': 'Request date was changed to today.'
+                }
+            }
+
     _name = 'library.checkout'
     _description = 'Checkout request'
     member_id = odoo.fields.Many2one(comodel_name='library.member',
