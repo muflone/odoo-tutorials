@@ -60,6 +60,20 @@ class Checkout(odoo.models.Model):
                 msg='Not allowed to create a checkout in state done.')
         return new_record
 
+    @odoo.api.multi
+    def write(self, vals):
+        # Code before update
+        if 'stage_id' in vals:
+            Stage = self.env['library.checkout.stage']
+            new_state = Stage.browse(vals['stage_id']).state
+            if new_state == 'open' and self.state != 'open':
+                vals['checkout_date'] = odoo.fields.Date.today()
+            elif new_state == 'done' and self.state != 'done':
+                vals['close_date'] = odoo.fields.Date.today()
+        super().write(vals)
+        # Code after update
+        return True
+
     _name = 'library.checkout'
     _description = 'Checkout request'
     member_id = odoo.fields.Many2one(comodel_name='library.member',
