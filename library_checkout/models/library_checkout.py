@@ -47,14 +47,14 @@ class Checkout(odoo.models.Model):
 
     @odoo.api.model
     def create(self, vals_list):
-        # Check before the creation
+        # Code before the creation
         if 'stage_id' in vals_list:
             Stage = self.env['library.checkout.stage']
             new_state = Stage.browse(vals_list['stage_id']).state
             if new_state == 'open':
                 vals_list['checkout_date'] = odoo.fields.Date.today()
         new_record = super().create(vals_list=vals_list)
-        # Check after creation
+        # Code after creation
         if new_record.state == 'done':
             raise odoo.tools.UserError(
                 msg='Not allowed to create a checkout in state done.')
