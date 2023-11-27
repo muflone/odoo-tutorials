@@ -72,10 +72,16 @@ class Checkout(odoo.models.Model):
                 vals['close_date'] = odoo.fields.Date.today()
         super().write(vals)
         # Code after update
+        self.message_post('write')
+        self.message_post('<b>Comment</b>',
+                          subject='Hello',
+                          subtype='mail.mt_comment')
         return True
 
     _name = 'library.checkout'
     _description = 'Checkout request'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
+
     member_id = odoo.fields.Many2one(comodel_name='library.member',
                                      required=True)
     user_id = odoo.fields.Many2one(comodel_name='res.users',
