@@ -18,6 +18,8 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
+import logging
+
 import odoo
 
 
@@ -40,8 +42,13 @@ class CheckoutMassMessage(odoo.models.TransientModel):
     @odoo.api.multi
     def button_send(self):
         self.ensure_one()
+        logger = logging.getLogger(__name__)
         for checkout in self.checkout_ids:
             checkout.message_post(body=self.message_body,
                                   subject=self.message_subject,
                                   subtype='mail.mt_comment')
+            logger.debug(
+                'Message on %d to followers: %s',
+                checkout.id,
+                checkout.message_follower_ids)
         return True
