@@ -43,6 +43,12 @@ class CheckoutMassMessage(odoo.models.TransientModel):
     def button_send(self):
         self.ensure_one()
         logger = logging.getLogger(__name__)
+        if not self.checkout_ids:
+            raise odoo.exceptions.UserError(
+                'Please select at least one checkout')
+        if not self.message_body or self.message_body == '<p><br></p>':
+            raise odoo.exceptions.UserError(
+                'Wite a message body to send')
         for checkout in self.checkout_ids:
             checkout.message_post(body=self.message_body,
                                   subject=self.message_subject,
