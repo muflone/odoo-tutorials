@@ -39,6 +39,7 @@
         'views/library_menu.xml',
         'views/checkout_view.xml',
         'views/checkout_stage_view.xml',
+        'views/checkout_massmessage_wizard_view.xml',
         'data/library_checkout_stage.xml',
     ],
 }

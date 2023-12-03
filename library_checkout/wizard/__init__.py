@@ -18,5 +18,4 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ##
 
-from . import models                                               # noqa: F401
-from . import wizard                                               # noqa: F401
+from .library_checkout_massmessage import CheckoutMassMessage
